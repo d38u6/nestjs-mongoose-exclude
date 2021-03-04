@@ -13,6 +13,7 @@ export class SanitizeMongooseModelInterceptor implements NestInterceptor {
       excludeMongooseV: true,
     },
   ) {}
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       map((data) => {
