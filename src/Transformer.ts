@@ -1,0 +1,60 @@
+import { DeepPartial } from './interfaces/deep-partial.type';
+import { TransformOptions } from './interfaces/transform-options.interface';
+import { MetadataSotrage } from './MetadataSotrage';
+import { getMongooseModelName } from './utilities';
+
+export class Transformer {
+  constructor(
+    private readonly storage: MetadataSotrage,
+    private readonly options: TransformOptions,
+  ) {}
+
+  private excludeProperties<T extends Record<string, any>>(
+    value: T,
+    modelName: string,
+  ): DeepPartial<T> {
+    const { excludeMongooseId, excludeMongooseV } = this.options;
+    if (typeof value?.toJSON === 'function') {
+      const JSONmodel = value.toJSON();
+      const excludedProperties = this.storage.getExcludeProperties(modelName);
+      excludedProperties?.forEach((v) => {
+        delete JSONmodel[v.propertyName];
+      });
+      if (excludeMongooseId) {
+        delete JSONmodel._id;
+      }
+      if (excludeMongooseV) {
+        delete JSONmodel.__v;
+      }
+      return JSONmodel;
+    }
+    return value;
+  }
+
+  transform<T>(value: T): DeepPartial<T> {
+    const modelName = getMongooseModelName(value);
+    if (modelName) {
+      return this.excludeProperties(value, modelName);
+    }
+
+    if (Array.isArray(value)) {
+      const newArray: DeepPartial<T> & any[] = [];
+      value.forEach((v) => {
+        newArray.push(this.transform(v));
+      });
+      return newArray;
+    }
+
+    if (typeof value === 'object') {
+      const newValue: DeepPartial<T> = {};
+      Object.entries(value).forEach(([k, v]) => {
+        const key = k as keyof typeof value;
+        newValue[key] = this.transform(v);
+      });
+
+      return newValue;
+    }
+
+    return value;
+  }
+}

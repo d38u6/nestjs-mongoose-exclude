@@ -1,5 +1,3 @@
-import { Model } from 'mongoose';
-
 export function getMongooseModelName(data: any): string | undefined {
   let modelName: string | undefined = undefined;
   const models = data?.__proto__?.db?.models;
