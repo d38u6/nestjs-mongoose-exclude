@@ -3,5 +3,6 @@
     "^.+\\.ts$": "ts-jest"
   },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
-  "modulePaths": ["./"]
+  "modulePaths": ["./"],
+  "testEnvironment": "node"
 }
