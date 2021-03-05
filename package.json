@@ -1,7 +1,7 @@
 {
   "name": "nestjs-mongoose-exclude",
   "version": "1.0.1",
-  "description": "Exclude selected properties for your mongoose document",
+  "description": "Exclude selected properties from your mongoose document",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
