@@ -3,8 +3,8 @@ import { MetadataSotrage } from '../MetadataSotrage';
 import { defaultTransformOptions } from '../interceptors/sanitize-mongoose-model.interceptor';
 
 jest.mock('../utilities', () => ({
-  getMongooseModelName: ({ model }: any) =>
-    model && model === 'MOCK_MODEL' ? 'MOCK_MODEL' : undefined,
+  getMongooseModelName: (data?: any) =>
+    data?.model && data.model === 'MOCK_MODEL' ? 'MOCK_MODEL' : undefined,
 }));
 
 const toJSONMock = () => {
@@ -123,6 +123,25 @@ describe('Transformer', () => {
           expect(transformer.transform(nestedValue)).toStrictEqual(sanitizeNestedValue);
         });
       });
+    });
+  });
+
+  describe('when transform null', () => {
+    it('should return null', () => {
+      expect(transformer.transform(null)).toStrictEqual(null);
+    });
+  });
+
+  describe('when transform undefined', () => {
+    it('should return undefined', () => {
+      expect(transformer.transform(undefined)).toStrictEqual(undefined);
+    });
+  });
+
+  describe('when transform string', () => {
+    it('should return string', () => {
+      const string = 'string';
+      expect(transformer.transform(string)).toStrictEqual(string);
     });
   });
 });

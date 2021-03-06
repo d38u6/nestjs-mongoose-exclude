@@ -45,7 +45,7 @@ export class Transformer {
       return newArray;
     }
 
-    if (typeof value === 'object') {
+    if (value !== null && typeof value === 'object') {
       const newValue: DeepPartial<T> = {};
       Object.entries(value).forEach(([k, v]) => {
         const key = k as keyof typeof value;
