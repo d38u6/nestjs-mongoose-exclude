@@ -144,4 +144,32 @@ describe('Transformer', () => {
       expect(transformer.transform(string)).toStrictEqual(string);
     });
   });
+
+  describe('when transform date', () => {
+    it('should return date', () => {
+      const date = new Date();
+      expect(transformer.transform(date)).toStrictEqual(date);
+    });
+  });
+
+  describe('when transform object String', () => {
+    it.only('should return object String', () => {
+      const string = new String('s');
+      expect(transformer.transform(string)).toStrictEqual(string);
+    });
+  });
+
+  describe('when transform object Number', () => {
+    it.only('should return object Number', () => {
+      const number = new Number(1);
+      expect(transformer.transform(number)).toStrictEqual(number);
+    });
+  });
+
+  describe('when transform object Boolean', () => {
+    it.only('should return object Boolean', () => {
+      const boolean = new Boolean(false);
+      expect(transformer.transform(boolean)).toStrictEqual(boolean);
+    });
+  });
 });

@@ -32,6 +32,17 @@ export class Transformer {
   }
 
   transform<T>(value: T): DeepPartial<T> {
+    if (
+      value === null ||
+      value === undefined ||
+      value instanceof Date ||
+      value instanceof String ||
+      value instanceof Number ||
+      value instanceof Boolean
+    ) {
+      return value;
+    }
+
     const modelName = getMongooseModelName(value);
     if (modelName) {
       return this.excludeProperties(value, modelName);
