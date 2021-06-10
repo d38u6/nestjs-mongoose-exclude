@@ -3,12 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TransformOptions } from '../interfaces/transform-options.interface';
 import { storage } from '../storage';
-import { Transformer } from '../Transformer';
-
-export const defaultTransformOptions = {
-  excludeMongooseId: true,
-  excludeMongooseV: true,
-};
+import { defaultTransformOptions, Transformer } from '../Transformer';
 
 @Injectable()
 export class SanitizeMongooseModelInterceptor implements NestInterceptor {

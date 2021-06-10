@@ -1,6 +1,6 @@
 import { Transformer } from '../Transformer';
 import { MetadataSotrage } from '../MetadataSotrage';
-import { defaultTransformOptions } from '../interceptors/sanitize-mongoose-model.interceptor';
+import { defaultTransformOptions } from '../Transformer';
 
 jest.mock('../utilities', () => ({
   getMongooseModelName: (data?: any) =>

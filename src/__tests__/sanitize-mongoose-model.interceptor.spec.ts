@@ -1,11 +1,8 @@
 import { CallHandler, ExecutionContext } from '@nestjs/common';
 import { of } from 'rxjs';
-import {
-  defaultTransformOptions,
-  SanitizeMongooseModelInterceptor,
-} from '../interceptors/sanitize-mongoose-model.interceptor';
+import { SanitizeMongooseModelInterceptor } from '../interceptors/sanitize-mongoose-model.interceptor';
 import { storage } from '../storage';
-import { Transformer } from '../Transformer';
+import { Transformer, defaultTransformOptions } from '../Transformer';
 jest.mock('../Transformer');
 
 const context = {} as ExecutionContext;

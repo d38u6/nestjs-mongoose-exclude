@@ -1,7 +1,13 @@
 import { DeepPartial } from './interfaces/deep-partial.type';
 import { TransformOptions } from './interfaces/transform-options.interface';
 import { MetadataSotrage } from './MetadataSotrage';
+import { storage } from './storage';
 import { getMongooseModelName } from './utilities';
+
+export const defaultTransformOptions = {
+  excludeMongooseId: true,
+  excludeMongooseV: true,
+};
 
 export class Transformer {
   constructor(
